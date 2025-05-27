@@ -11,6 +11,8 @@ function Page() {
     <>
       <section>
         <div className="container py-5">
+          <h2 className="title"><span className="text-dark">About <b className="color1">Me</b></span></h2>
+
           <div className="row align-items-center bg-white shadow rounded-4 p-4 g-4">
             {/* Image Section */}
             <div className="col-12 col-lg-6">
