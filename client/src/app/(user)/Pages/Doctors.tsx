@@ -15,7 +15,7 @@ interface Doctor {
   image: string;
 }
 
-const DoctorPage = () => {
+const Doctors = () => {
   const [doctors, setDoctors] = useState<Doctor[]>([]);
 
   useEffect(() => {
@@ -90,4 +90,4 @@ const DoctorPage = () => {
   );
 };
 
-export default DoctorPage;
+export default Doctors;

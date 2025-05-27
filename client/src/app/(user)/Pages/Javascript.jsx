@@ -26,6 +26,7 @@ export let cardData = [
   },
 ];
 
+
 export let welcomeData={
   "title": "Welcome to Bista Polyclinic",
   "intro": "Bista Polyclinic is a premier healthcare institution committed to providing exceptional medical care with a focus on patient comfort and well-being. Our state-of-the-art facilities and cutting-edge technology ensure that you receive the best possible treatment.",

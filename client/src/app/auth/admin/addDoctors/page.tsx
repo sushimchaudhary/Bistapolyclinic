@@ -139,7 +139,7 @@ const DoctorPage = () => {
   return (
     <div className="min-h-screen flex flex-col bg-gradient-to-b from-blue-50 to-white ">
       <Toaster position="top-center" />
-   
+
 
       <main className="max-w-7xl mx-auto px-4 py-10 flex-grow">
         <h1 className="text-4xl font-bold mb-10 text-center text-blue-800">
@@ -248,57 +248,67 @@ const DoctorPage = () => {
             )}
           </div>
         </form>
+        <div className="container py-5">
+          <h2 className="text-center text-primary fw-bold display-5 mb-5">📋 Doctors List</h2>
+          <div className="row g-4">
+            {doctors.map((doc) => (
+              <div key={doc._id} className="col-12 col-sm-6 col-lg-4">
+                <div
+                  className="card h-80 shadow-sm border-0 rounded overflow-hidden doctor-card"
+                  style={{ transition: 'transform 0.3s ease, box-shadow 0.3s ease' }}
+                 
+                >
+                  <div className="overflow-hidden">
+                    <img
+                      src={`http://localhost:5000${doc.image}`}
+                      alt={doc.name}
+                      className="card-img-top"
+                      style={{ height: '220px', objectFit: 'cover', transition: 'transform 0.3s ease' }}
+                     
+                    />
+                  </div>
 
-        <h2 className="text-3xl font-semibold mb-6 text-gray-800">📋 Doctors List</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-          {doctors.map((doc) => (
-            <div
-              key={doc._id}
-              className="bg-white rounded-xl shadow-md hover:shadow-xl transition overflow-hidden"
-            >
-              <img
-                src={`http://localhost:5000${doc.image}`}
-                alt={doc.name}
-                className="img-fluid doctor-img"
-              />
-              <div className="p-4 flex flex-col flex-grow">
-                <h3 className="text-xl font-semibold text-gray-900">{doc.name}</h3>
-                <span className="text-blue-600 font-medium">{doc.specialization}</span>
-                <span className="text-sm text-gray-500">{doc.experience}</span>
-                <p className="text-sm text-gray-700 mt-1 line-clamp-3">{doc.bio}</p>
+                  <div className="card-body d-flex flex-column">
+                    <h5 className="card-title">{doc.name}</h5>
+                    <p className="text-primary mb-1">{doc.specialization}</p>
+                    <p className="text-muted mb-2" style={{ fontSize: '0.875rem' }}>{doc.experience}</p>
+                    <p className="card-text text-truncate" style={{ maxHeight: '4.5rem', overflow: 'hidden' }}>
+                      {doc.bio}
+                    </p>
 
-                <div className="gap-2 ">
-                  {doc.education.map((edu, index) => (
-                    <div
-                      key={`edu-${doc._id}-${index}`}
-                      className="text-red-500 text-xs "
-                    >
-                      {edu}
+                    <div className="mt-auto">
+                      {doc.education.map((edu, index) => (
+                        <small key={index} className="text-danger d-block mb-1" style={{ fontSize: '0.75rem' }}>
+                          {edu}
+                        </small>
+                      ))}
                     </div>
-                  ))}
-                </div>
 
-                <div className="flex justify-between items-center mt-4">
-                  <Button
-                    onClick={() => handleEdit(doc)}
-                    className="bg-blue-500 hover:bg-blue-600 text-white text-sm px-3 py-1 rounded-lg"
-                  >
-                    Edit
-                  </Button>
-                  <button
-                    onClick={() => handleDelete(doc._id)}
-                    className="bg-red-500 hover:bg-red-600 text-white text-sm px-3 py-1 rounded-lg"
-                  >
-                    Delete
-                  </button>
+                    <div className="mt-3 d-flex justify-content-between">
+                      <button
+                        className="btn btn-sm btn-primary"
+                        onClick={() => handleEdit(doc)}
+                      >
+                        Edit
+                      </button>
+                      <button
+                        className="btn btn-sm btn-danger"
+                        onClick={() => handleDelete(doc._id)}
+                      >
+                        Delete
+                      </button>
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
+
+
       </main>
 
-      
+
     </div>
   );
 };

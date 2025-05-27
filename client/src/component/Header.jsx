@@ -35,10 +35,14 @@ function Header() {
                 <FaClock className="me-1" /> Sun–Fri: 07:00AM - 6:00PM
               </span>
               <span className="d-flex align-items-center ms-md-3">
-                <FaMapMarkerAlt className="me-1" /> New Baneshwor, Kathmandu
+                <FaMapMarkerAlt className="me-1" /> Sisahaniya, Rapti-7, Dang
+
+
               </span>
               <span className="d-flex align-items-center ms-md-3">
-                <FaEnvelope className="me-1" /> info@nepguru.com
+                <FaEnvelope className="me-1" /> info@bistapoliclinic.com
+
+
               </span>
             </div>
             <div className="col-md-4 d-flex justify-content-center justify-content-md-end gap-3 mt-2 mt-md-0">

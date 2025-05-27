@@ -107,7 +107,7 @@ const AddNewsPage = () => {
   return (
     <div className="min-h-screen flex flex-col bg-gradient-to-b from-blue-50 to-white">
       <Toaster position="top-center" />
-     
+
 
       <main className="max-w-6xl mx-auto px-4 py-12 flex-grow">
         <h1 className="text-4xl font-bold mb-12 text-center text-indigo-700">
@@ -170,46 +170,50 @@ const AddNewsPage = () => {
           </div>
         </form>
 
-        <h2 className="text-3xl font-semibold mb-8 text-gray-800 text-center">
+        <h2 className="text-3xl font-semibold mb-8 text-gray-800 text-center pb-3">
           📢 Latest News
         </h2>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="row g-4">
           {newsList.map((item) => (
-            <div
-              key={item._id}
-              className="bg-white rounded-2xl shadow-md hover:shadow-xl transition-all overflow-hidden"
-            >
-              <img
-                src={`http://localhost:5000${item.image}`}
-                alt={item.title}
-                className="w-full h-48 object-cover"
-              />
-              <div className="p-5">
-                <h3 className="text-lg font-semibold text-gray-800">{item.title}</h3>
-                <p className="text-sm text-gray-500 mb-1">By {item.author}</p>
-                <p className="text-sm text-gray-700 line-clamp-3">{item.description}</p>
-                <div className="flex justify-between mt-4">
-                  <Button
-                    onClick={() => handleEdit(item)}
-                    className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md text-sm"
-                  >
-                    Edit
-                  </Button>
-                  <button
-                    onClick={() => handleDelete(item._id)}
-                    className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-md text-sm"
-                  >
-                    Delete
-                  </button>
+            <div className="col-12 col-sm-6 col-lg-4" key={item._id}>
+              <div className="card h-100 w-[100%] shadow-lg border-0 overflow-hidden hover-shadow transition">
+                <div className="overflow-hidden">
+                  <img
+                    src={`http://localhost:5000${item.image}`}
+                    className="card-img-top p-2 rounded"
+                    alt={item.title}
+                    style={{ height: "240px", objectFit: "cover" }}
+                  />
+                </div>
+                <div className="card-body">
+                  <h5 className="card-title">{item.title}</h5>
+                  <p className="card-subtitle text-muted mb-1">By {item.author}</p>
+                  <p className="card-text text-truncate" style={{ maxHeight: "60px" }}>
+                    {item.description}
+                  </p>
+                  <div className="d-flex justify-content-between mt-3">
+                    <button
+                      className="btn btn-sm btn-primary"
+                      onClick={() => handleEdit(item)}
+                    >
+                      Edit
+                    </button>
+                    <button
+                      className="btn btn-sm btn-danger"
+                      onClick={() => handleDelete(item._id)}
+                    >
+                      Delete
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
           ))}
         </div>
+
       </main>
 
-    
+
     </div>
   );
 };

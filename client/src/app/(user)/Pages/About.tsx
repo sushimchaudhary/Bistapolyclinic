@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { slides, welcomeData } from '../Pages/Javascript'
 // import { useState } from "react";
 
-function Page() {
+function About() {
   const [expanded, setExpanded] = useState(false);
 
   const toggleText = () => setExpanded(!expanded);
@@ -107,4 +107,4 @@ function Page() {
   )
 }
 
-export default Page
+export default About
