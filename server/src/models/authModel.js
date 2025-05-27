@@ -24,10 +24,6 @@ const authSchema = new mongoose.Schema({
     type: String,
     default: "admin", // or "user"
   },
-  active: {
-     type: Boolean,
-     default: false 
-    }, // default false
 }, { timestamps: true });
 
 
