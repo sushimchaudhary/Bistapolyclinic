@@ -24,6 +24,12 @@ function Header() {
       setIsAdmin(true);
     }
   }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem("adminToken");
+    setIsAdmin(false); // 🟢 adminToken हटेपछि state पनि false मा सेट हुन्छ
+  };
+
   return (
     <>
       {/* header section start */}
@@ -42,21 +48,11 @@ function Header() {
               </span>
             </div>
             <div className="col-md-4 d-flex justify-content-center justify-content-md-end gap-3 mt-2 mt-md-0">
-              <a href="#" className="text-white">
-                <FaFacebookF />
-              </a>
-              <a href="#" className="text-white">
-                <FaInstagram />
-              </a>
-              <a href="#" className="text-white">
-                <FaTwitter />
-              </a>
-              <a href="#" className="text-white">
-                <FaLinkedinIn />
-              </a>
-              <a href="#" className="text-white">
-                <FaYoutube />
-              </a>
+              <a href="#" className="text-white"><FaFacebookF /></a>
+              <a href="#" className="text-white"><FaInstagram /></a>
+              <a href="#" className="text-white"><FaTwitter /></a>
+              <a href="#" className="text-white"><FaLinkedinIn /></a>
+              <a href="#" className="text-white"><FaYoutube /></a>
             </div>
           </div>
         </div>
@@ -64,10 +60,11 @@ function Header() {
 
       {/* navbar start */}
       <nav className="navbar bg-light navbar-expand-lg py-3 border-top border-bottom sticky-top shadow">
-        <div className="container">
-          <Link className="navbar-brand" href="/">
-            BISTA<span>POLICLINIC</span>
+        <div className="container d-flex align-items-center justify-content-between">
+          <Link className="navbar-brand fw-bold" href="/">
+            BISTA<span className="text-primary">POLICLINIC</span>
           </Link>
+
           <button
             className="navbar-toggler"
             type="button"
@@ -78,6 +75,7 @@ function Header() {
           >
             <span className="navbar-toggler-icon" />
           </button>
+
           <div
             className="offcanvas offcanvas-end"
             tabIndex={-1}
@@ -86,7 +84,7 @@ function Header() {
           >
             <div className="offcanvas-header">
               <h5 className="offcanvas-title" id="offcanvasNavbarLabel">
-                BISTA<span className="logo">BISTAPOLICLINIC</span>
+                BISTA<span className="logo text-primary">POLICLINIC</span>
               </h5>
               <button
                 type="button"
@@ -95,78 +93,47 @@ function Header() {
                 aria-label="Close"
               />
             </div>
-            <div className="offcanvas-body align-items-center">
-              <ul className="navbar-nav justify-content-end flex-grow-1 end">
-                <li className="nav-item">
-                  <Link
-                    className="nav-link active"
-                    aria-current="page"
-                    href="/"
-                  >
-                    Home
-                  </Link>
-                </li>
-                <li className="nav-item">
-                  <Link href="/About" className="nav-link">
-                    About
-                  </Link>
-                </li>
-                <li className="nav-item">
-                  <Link className="nav-link" href="/Services">
-                    Services
-                  </Link>
-                </li>
-                <li className="nav-item">
-                  <Link className="nav-link" href="/Doctor">
-                    Doctors
-                  </Link>
-                </li>
-                <li className="nav-item">
-                  <Link className="nav-link" href="/News">
-                    News
-                  </Link>
-                </li>
-                <li className="nav-item">
-                  <Link className="nav-link" href="/Contact">
-                    Contact
-                  </Link>
-                </li>
 
-                <div className="flex gap-3 text-end">
-                <li>
-                  <Link href="/Appointment" className="text-decoration-none">
-                    <button className="flex items-center gap-2 bg-primary text-white px-6 py-2 rounded">
-                      Appointment
-                      <FaArrowRightLong className="text-lg" />
-                    </button>
-                  </Link>
+            <div className="offcanvas-body d-flex flex-column flex-lg-row align-items-lg-center justify-content-lg-between w-100">
+              <ul className="navbar-nav flex-grow-1 d-flex flex-column flex-lg-row gap-2 gap-lg-3 justify-content-lg-end align-items-lg-center mb-4 mb-lg-0">
+                <li className="nav-item">
+                  <Link className="nav-link active" href="/">Home</Link>
                 </li>
-                {/* Conditional Dashboard */}
+                <li className="nav-item">
+                  <Link className="nav-link" href="/About">About</Link>
+                </li>
+                <li className="nav-item">
+                  <Link className="nav-link" href="/Services">Services</Link>
+                </li>
+                <li className="nav-item">
+                  <Link className="nav-link" href="/Doctor">Doctors</Link>
+                </li>
+                <li className="nav-item">
+                  <Link className="nav-link" href="/News">News</Link>
+                </li>
+                <li className="nav-item">
+                  <Link className="nav-link" href="/Contact">Contact</Link>
+                </li>
+              </ul>
+
+              <div className="d-flex flex-column flex-sm-row gap-3 align-items-stretch align-items-sm-center">
+                <Link href="/Appointment" className="text-decoration-none">
+                  <button className="d-flex align-items-center gap-2 bg-primary text-white px-4 py-2 rounded border-0 w-100 w-sm-auto">
+                    Appointment
+                    <FaArrowRightLong className="text-lg" />
+                  </button>
+                </Link>
+
                 {isAdmin && (
-                  <li>
-                    <Link className="text-decoration-none" href="/dashboard">
-                      <button className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition">
+                  <>
+                    <Link href="/dashboard" className="text-decoration-none">
+                      <button className="bg-success text-white px-4 py-2 rounded border-0 w-100 w-sm-auto">
                         Dashboard
                       </button>
                     </Link>
-                  </li>
+                  </>
                 )}
-
-                {/* {!isAdmin && (
-                  <li>
-                    <Link
-                      className="text-decoration-none"
-                      href="/auth/adminLogin"
-                    >
-                      <button className="bg-primary text-white px-4 py-2 rounded hover:bg-primary/90 transition">
-                       
-                      </button>
-                    </Link>
-                  </li>
-
-                )} */}
-                </div>
-              </ul>
+              </div>
             </div>
           </div>
         </div>

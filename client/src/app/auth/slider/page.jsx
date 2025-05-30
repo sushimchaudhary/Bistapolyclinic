@@ -73,88 +73,89 @@ const SliderManager = () => {
   };
 
   return (
-    <div className="max-w-7xl mx-auto p-6">
-      <Toaster position="top-right" />
-      
-      {/* Upload Section */}
-      <div className="mt-8 bg-white p-6 rounded-lg shadow-md max-w-sm mx-auto">
-        <h2 className="text-2xl font-semibold mb-4 text-gray-800 text-center">
-          Slider Image Upload (About Page)
-        </h2>
+  
+    <section>
+      <div className="container py-5">
+        <Toaster position="top-end" />
 
-        <input
-          type="file"
-          ref={fileInputRef}
-          onChange={handleFilesChange}
-          multiple
-          accept="image/*"
-          className="block w-full text-gray-700 mb-4
-            file:py-2 file:px-4 file:border-0
-            file:text-sm file:font-semibold
-            file:bg-green-100 file:text-green-700
-            hover:file:bg-green-200 cursor-pointer
-            rounded-md transition"
-        />
+        {/* Upload Section */}
+        <div className="mt-4 bg-white p-4 rounded shadow-sm mx-auto text-center" style={{ maxWidth: "500px" }}>
+          <h2 className="h5 text-center mb-3 text-dark">
+            Slider Image Upload (About Page)
+          </h2>
 
-        <button
-          onClick={handleUpload}
-          className="w-full bg-green-600 hover:bg-green-700 text-white font-medium py-2 rounded-md transition duration-200"
-        >
-          Upload Slider Images
-        </button>
+          <input
+            type="file"
+            ref={fileInputRef}
+            onChange={handleFilesChange}
+            multiple
+            accept="image/*"
+            className="form-control mb-3"
+          />
 
-        {previews.length > 0 && (
-          <div className="mt-4">
-            <p className="text-sm text-gray-600 mb-1">Image Preview:</p>
-            <div className="flex flex-wrap gap-4">
-              {previews.map((url, idx) => (
-                <img
-                  key={idx}
-                  src={url}
-                  alt={`Preview ${idx + 1}`}
-                  className="w-32 h-20 object-cover rounded border"
-                />
+          <button
+            onClick={handleUpload}
+            className="btn btn-primary w-40"
+          >
+            Upload Images
+          </button>
+
+          {previews.length > 0 && (
+            <div className="mt-3">
+              <p className="small text-muted mb-2">Image Preview:</p>
+              <div className="d-flex flex-wrap gap-2">
+                {previews.map((url, idx) => (
+                  <img
+                    key={idx}
+                    src={url}
+                    alt={`Preview ${idx + 1}`}
+                    className="img-thumbnail"
+                    style={{ width: "128px", height: "80px", objectFit: "cover" }}
+                  />
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+
+        {/* Manage Slider Images Section */}
+        <div className="mt-5">
+          <h3 className="text-center mb-4">Manage Slider Images</h3>
+
+          {slides.length === 0 ? (
+            <p className="text-muted text-center">No slider images uploaded.</p>
+          ) : (
+            <div className="row g-4">
+              {slides.map((slide) => (
+                <div key={slide._id} className="col-6 col-md-4 col-lg-3">
+                  <div className="position-relative border rounded shadow-sm h-100">
+                    <img
+                      src={slide.imageUrl}
+                      alt="slider"
+                      className="w-100 p-2 rounded-xl"
+                      style={{ height: "260px", objectFit: "cover"}}
+                    />
+
+                    <div className="text-center py-3 text-white">
+                      <button
+                        onClick={() => handleDelete(slide._id)}
+                        className="p-2 text-center btn btn-primary"
+                        title="Delete Slide"
+                      >
+                        Delete
+                      </button>
+                    </div>
+
+                  </div>
+
+                </div>
               ))}
             </div>
-          </div>
-        )}
+          )}
+        </div>
       </div>
 
-      {/* Manage Slider Images Section */}
-      <div className="mt-12">
-        <h1 className="text-2xl font-semibold mb-6 text-center">Manage Slider Images</h1>
-
-        {slides.length === 0 ? (
-          <p className="text-gray-500 text-center">No slider images uploaded.</p>
-        ) : (
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            {slides.map((slide) => (
-              <div key={slide._id} className="relative border rounded shadow hover:shadow-lg transition-shadow duration-200">
-                <img
-                  src={slide.imageUrl}
-                  alt="slider"
-                  className="w-full h-40 object-cover rounded-t"
-                  loading="lazy"
-                />
-                <button
-                  onClick={() => handleDelete(slide._id)}
-                  className="absolute top-2 right-2 bg-red-600 hover:bg-red-700 text-white text-sm px-2 py-1 rounded-full shadow-lg"
-                  title="Delete Slide"
-                >
-                  ✖
-                </button>
-                <div
-                  className="p-2 text-sm text-center truncate select-text"
-                  title={slide.imageUrl}
-                >
-                  {slide.imageUrl}
-                </div>
-              </div>
-            ))}
-          </div>
-        )}
-      </div>
-    </div>
+    </section>
   );
 };
 

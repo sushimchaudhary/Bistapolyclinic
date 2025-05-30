@@ -1,10 +1,13 @@
+
+
+
+
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 
-import { Button } from "@/components/ui/button";
 
 interface News {
   _id: string;
@@ -21,7 +24,6 @@ const AddNewsPage = () => {
   const [image, setImage] = useState<File | null>(null);
   const [newsList, setNewsList] = useState<News[]>([]);
   const [editingId, setEditingId] = useState<string | null>(null);
-  const formRef = useRef<HTMLFormElement>(null); // form ref
 
   useEffect(() => {
     fetchNews();
@@ -87,16 +89,12 @@ const AddNewsPage = () => {
   };
 
   const handleEdit = (item: News) => {
-  setTitle(item.title);
-  setDescription(item.description);
-  setAuthor(item.author);
-  setEditingId(item._id);
-  setImage(null);
-
-  // Scroll to the top smoothly when editing
-  window.scrollTo({ top: 0, behavior: "smooth" });
-};
-
+    setTitle(item.title);
+    setDescription(item.description);
+    setAuthor(item.author);
+    setEditingId(item._id);
+    setImage(null);
+  };
 
   const handleDelete = async (id: string) => {
     try {
@@ -110,113 +108,115 @@ const AddNewsPage = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-gradient-to-b from-blue-50 to-white">
+    <section className="min-h-screen flex flex-col bg-gradient-to-b from-blue-50 to-white">
       <Toaster position="top-center" />
 
-      <main className="max-w-6xl mx-auto px-4 py-12 flex-grow">
-        <h1 className="text-4xl font-bold mb-12 text-center text-indigo-700">
+
+      <main className="container py-5">
+        <h1 className="text-center text-primary fw-bold mb-5 fs-1">
           📰 {editingId ? "Edit News" : "Add News"}
         </h1>
 
-        <form
-          ref={formRef}
-          onSubmit={handleSubmit}
-          className="bg-white rounded-2xl shadow-lg p-10 space-y-6 mb-16"
-        >
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <input
-              type="text"
-              placeholder="Title"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-              className="p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-              required
-            />
+        <form onSubmit={handleSubmit} className="bg-white p-4 p-md-5 rounded-4 shadow mb-5">
+          <div className="row g-4">
+            {/* News Title */}
+            <div className="col-md-6">
+              <label className="form-label fw-medium text-secondary">News Title</label>
+              <input
+                type="text"
+                className="form-control p-3 rounded-3"
+                placeholder="Enter news title"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+                required
+              />
+            </div>
 
-            <input
-              type="text"
-              placeholder="Author"
-              value={author}
-              onChange={(e) => setAuthor(e.target.value)}
-              className="p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-              required
-            />
+            {/* Author */}
+            <div className="col-md-6">
+              <label className="form-label fw-medium text-secondary">Author Name</label>
+              <input
+                type="text"
+                className="form-control p-3 rounded-3"
+                placeholder="Enter author name"
+                value={author}
+                onChange={(e) => setAuthor(e.target.value)}
+                required
+              />
+            </div>
 
-            <input
-              type="file"
-              accept="image/*"
-              onChange={handleImageChange}
-              className="p-4 border border-gray-300 rounded-lg bg-white"
-              required={!editingId}
-            />
+            {/* Image */}
+            <div className="col-md-6">
+              <label className="form-label fw-medium text-secondary">Upload Image</label>
+              <input
+                type="file"
+                className="form-control p-3 rounded-3"
+                accept="image/*"
+                onChange={handleImageChange}
+                required={!editingId}
+              />
+            </div>
 
-            <textarea
-              placeholder="Description"
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-              className="p-4 border border-gray-300 rounded-lg col-span-1 md:col-span-2 h-32 resize-none focus:outline-none focus:ring-2 focus:ring-blue-500"
-              required
-            />
+            {/* Description */}
+            <div className="col-md-12">
+              <label className="form-label fw-medium text-secondary">Description</label>
+              <textarea
+                className="form-control p-3 rounded-3"
+                rows="4"
+                placeholder="Write a brief description..."
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+                required
+              />
+            </div>
           </div>
 
-          <div className="flex flex-wrap gap-4 pt-4">
-            <Button
-              type="submit"
-              className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg"
-            >
+          {/* Buttons */}
+          <div className="d-flex flex-column flex-sm-row gap-3 mt-4">
+            <button type="submit" className="btn btn-primary px-4 py-2 fw-semibold">
               {editingId ? "Update News" : "Submit News"}
-            </Button>
+            </button>
             {editingId && (
-              <Button
-                type="button"
-                onClick={resetForm}
-                className="bg-gray-500 hover:bg-gray-600 text-white px-6 py-3 rounded-lg"
-              >
+              <button type="button" onClick={resetForm} className="btn btn-secondary px-4 py-2 fw-semibold">
                 Cancel
-              </Button>
+              </button>
             )}
           </div>
         </form>
 
-        <h2 className="text-3xl font-semibold mb-8 text-gray-800 text-center">
-          📢 Latest News
-        </h2>
+        <h2 className="text-center text-dark fw-semibold fs-3 mb-4">📢 Latest News</h2>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="row g-4">
           {newsList.map((item) => (
-            <div
-              key={item._id}
-              className="bg-white rounded-2xl shadow-md hover:shadow-xl transition-all overflow-hidden"
-            >
-              <img
-                src={`http://localhost:5000${item.image}`}
-                alt={item.title}
-                className="w-full h-48 object-cover"
-              />
-              <div className="p-5">
-                <h3 className="text-lg font-semibold text-gray-800">{item.title}</h3>
-                <p className="text-sm text-gray-500 mb-1">By {item.author}</p>
-                <p className="text-sm text-gray-700 line-clamp-3">{item.description}</p>
-                <div className="flex justify-between mt-4">
-                  <Button
-                    onClick={() => handleEdit(item)}
-                    className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md text-sm"
-                  >
-                    Edit
-                  </Button>
-                  <button
-                    onClick={() => handleDelete(item._id)}
-                    className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-md text-sm"
-                  >
-                    Delete
-                  </button>
+            <div className="col-sm-6 col-lg-4" key={item._id}>
+              <div className="card h-100 shadow-sm border-0 rounded-4">
+                <img
+                  src={`http://localhost:5000${item.image}`}
+                  className="card-img-top object-fit-cover"
+                  style={{ height: "200px" }}
+                  alt={item.title}
+                />
+                <div className="card-body d-flex flex-column">
+                  <h5 className="card-title">{item.title}</h5>
+                  <p className="text-muted small mb-1">By {item.author}</p>
+                  <p className="card-text text-truncate">{item.description}</p>
+                  <div className="mt-auto d-flex justify-content-between">
+                    <button onClick={() => handleEdit(item)} className="btn btn-sm btn-outline-primary">
+                      Edit
+                    </button>
+                    <button onClick={() => handleDelete(item._id)} className="btn btn-sm btn-outline-danger">
+                      Delete
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
           ))}
         </div>
       </main>
-    </div>
+
+
+    </section>
   );
 };
 

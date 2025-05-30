@@ -3,7 +3,6 @@
 import { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
-import { Button } from "@/components/ui/button";
 
 interface Service {
   _id: string;
@@ -44,6 +43,7 @@ const AddServicesPage = () => {
     setDescription("");
     setImage(null);
     setEditingId(null);
+    if (formRef.current) formRef.current.reset();
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -88,8 +88,7 @@ const AddServicesPage = () => {
     setDescription(item.description);
     setEditingId(item._id);
     setImage(null);
-  // Scroll to the top smoothly when editing
-  window.scrollTo({ top: 0, behavior: "smooth" });
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const handleDelete = async (id: string) => {
@@ -104,96 +103,106 @@ const AddServicesPage = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-gradient-to-b from-green-50 to-white">
+    <div className="min-vh-100 d-flex flex-column bg-light">
       <Toaster position="top-center" />
-
-      <main className="max-w-6xl mx-auto px-4 py-12 flex-grow">
-        <h1 className="text-4xl font-bold mb-12 text-center text-green-700">
+      <main className="container py-5 flex-grow-1">
+        <h1 className="text-center fw-bold text-success mb-5 fs-1">
           🏥 {editingId ? "Edit Service" : "Add Service"}
         </h1>
 
         <form
           ref={formRef}
           onSubmit={handleSubmit}
-          className="bg-white rounded-2xl shadow-lg p-10 space-y-6 mb-16"
+          className="bg-white rounded-4 shadow p-4 p-md-5 mb-5"
         >
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <input
-              type="text"
-              placeholder="Title"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-              className="p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
-              required
-            />
+          <div className="row g-4">
+            {/* Title */}
+            <div className="col-md-6">
+              <input
+                type="text"
+                placeholder="Service Title"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+                className="form-control p-3 rounded-3"
+                required
+              />
+            </div>
 
-            <input
-              type="file"
-              accept="image/*"
-              onChange={handleImageChange}
-              className="p-4 border border-gray-300 rounded-lg bg-white"
-              required={!editingId}
-            />
+            {/* Image Upload */}
+            <div className="col-md-6">
+              <input
+                type="file"
+                accept="image/*"
+                onChange={handleImageChange}
+                className="form-control p-3 rounded-3"
+                required={!editingId}
+              />
+            </div>
 
-            <textarea
-              placeholder="Description"
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-              className="p-4 border border-gray-300 rounded-lg col-span-1 md:col-span-2 h-32 resize-none focus:outline-none focus:ring-2 focus:ring-green-500"
-              required
-            />
+            {/* Description */}
+            <div className="col-12">
+              <textarea
+                placeholder="Service Description"
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+                className="form-control p-3 rounded-3"
+                rows={4}
+                required
+              />
+            </div>
           </div>
 
-          <div className="flex flex-wrap gap-4 pt-4">
-            <Button
+          {/* Buttons */}
+          <div className="d-flex flex-column flex-sm-row gap-3 mt-4">
+            <button
               type="submit"
-              className="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg"
+              className="btn btn-success px-4 py-2 fw-semibold"
             >
               {editingId ? "Update Service" : "Submit Service"}
-            </Button>
+            </button>
             {editingId && (
-              <Button
+              <button
                 type="button"
                 onClick={resetForm}
-                className="bg-gray-500 hover:bg-gray-600 text-white px-6 py-3 rounded-lg"
+                className="btn btn-secondary px-4 py-2 fw-semibold"
               >
                 Cancel
-              </Button>
+              </button>
             )}
           </div>
         </form>
 
-        <h2 className="text-3xl font-semibold mb-8 text-gray-800 text-center">
+        <h2 className="text-center text-dark fw-semibold fs-3 mb-4">
           💼 Services List
         </h2>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="row g-4">
           {servicesList.map((item) => (
-            <div
-              key={item._id}
-              className="bg-white rounded-2xl shadow-md hover:shadow-xl transition-all overflow-hidden"
-            >
-              <img
-                src={`http://localhost:5000${item.image}`}
-                alt={item.title}
-                className="w-full h-48 object-cover"
-              />
-              <div className="p-5">
-                <h3 className="text-lg font-semibold text-gray-800">{item.title}</h3>
-                <p className="text-sm text-gray-700 line-clamp-3">{item.description}</p>
-                <div className="flex justify-between mt-4">
-                  <Button
-                    onClick={() => handleEdit(item)}
-                    className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-md text-sm"
-                  >
-                    Edit
-                  </Button>
-                  <button
-                    onClick={() => handleDelete(item._id)}
-                    className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-md text-sm"
-                  >
-                    Delete
-                  </button>
+            <div className="col-sm-6 col-lg-4" key={item._id}>
+              <div className="card h-100 shadow-sm border-0 rounded-4 overflow-hidden">
+                <img
+                  src={`http://localhost:5000${item.image}`}
+                  alt={item.title}
+                  className="card-img-top object-fit-cover"
+                  style={{ height: "200px" }}
+                />
+                <div className="card-body d-flex flex-column">
+                  <h5 className="card-title fw-semibold">{item.title}</h5>
+                  <p className="card-text text-truncate">{item.description}</p>
+                  <div className="mt-auto d-flex justify-content-between">
+                    <button
+                      onClick={() => handleEdit(item)}
+                      className="btn btn-sm btn-outline-success"
+                    >
+                      Edit
+                    </button>
+                    <button
+                      onClick={() => handleDelete(item._id)}
+                      className="btn btn-sm btn-outline-danger"
+                    >
+                      Delete
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
