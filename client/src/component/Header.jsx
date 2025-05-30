@@ -15,6 +15,7 @@ import {
 import { FaArrowRightLong } from "react-icons/fa6";
 import React, { useEffect, useState } from "react";
 
+
 function Header() {
   const [isAdmin, setIsAdmin] = useState(false);
 
@@ -63,114 +64,89 @@ function Header() {
       </section>
 
       {/* navbar start */}
-      <nav className="navbar bg-light navbar-expand-lg py-3 border-top border-bottom sticky-top shadow">
-        <div className="container">
-          <Link className="navbar-brand" href="/">
-            BISTA<span>POLICLINIC</span>
-          </Link>
-          <button
-            className="navbar-toggler"
-            type="button"
-            data-bs-toggle="offcanvas"
-            data-bs-target="#offcanvasNavbar"
-            aria-controls="offcanvasNavbar"
-            aria-label="Toggle navigation"
-          >
-            <span className="navbar-toggler-icon" />
-          </button>
-          <div
-            className="offcanvas offcanvas-end"
-            tabIndex={-1}
-            id="offcanvasNavbar"
-            aria-labelledby="offcanvasNavbarLabel"
-          >
-            <div className="offcanvas-header">
-              <h5 className="offcanvas-title" id="offcanvasNavbarLabel">
-                BISTA<span className="logo">BISTAPOLICLINIC</span>
-              </h5>
-              <button
-                type="button"
-                className="btn-close"
-                data-bs-dismiss="offcanvas"
-                aria-label="Close"
-              />
-            </div>
-            <div className="offcanvas-body align-items-center">
-              <ul className="navbar-nav justify-content-end flex-grow-1 end">
-                <li className="nav-item">
-                  <Link
-                    className="nav-link active"
-                    aria-current="page"
-                    href="/"
-                  >
-                    Home
-                  </Link>
-                </li>
-                <li className="nav-item">
-                  <Link href="/About" className="nav-link">
-                    About
-                  </Link>
-                </li>
-                <li className="nav-item">
-                  <Link className="nav-link" href="/Services">
-                    Services
-                  </Link>
-                </li>
-                <li className="nav-item">
-                  <Link className="nav-link" href="/Doctor">
-                    Doctors
-                  </Link>
-                </li>
-                <li className="nav-item">
-                  <Link className="nav-link" href="/News">
-                    News
-                  </Link>
-                </li>
-                <li className="nav-item">
-                  <Link className="nav-link" href="/Contact">
-                    Contact
-                  </Link>
-                </li>
+         <nav className="navbar bg-light navbar-expand-lg py-3 border-top border-bottom sticky-top shadow">
+      <div className="container d-flex align-items-center justify-content-between">
+        {/* Brand */}
+        <Link className="navbar-brand fw-bold" href="/">
+          BISTA<span className="text-primary">POLICLINIC</span>
+        </Link>
 
-                <div className="flex gap-3 text-end">
-                <li>
-                  <Link href="/Appointment" className="text-decoration-none">
-                    <button className="flex items-center gap-2 bg-primary text-white px-6 py-2 rounded">
-                      Appointment
-                      <FaArrowRightLong className="text-lg" />
-                    </button>
-                  </Link>
-                </li>
-                {/* Conditional Dashboard */}
-                {isAdmin && (
-                  <li>
-                    <Link className="text-decoration-none" href="/dashboard">
-                      <button className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition">
-                        Dashboard
-                      </button>
-                    </Link>
-                  </li>
-                )}
+        {/* Toggler for small screens */}
+        <button
+          className="navbar-toggler"
+          type="button"
+          data-bs-toggle="offcanvas"
+          data-bs-target="#offcanvasNavbar"
+          aria-controls="offcanvasNavbar"
+          aria-label="Toggle navigation"
+        >
+          <span className="navbar-toggler-icon" />
+        </button>
 
-                {/* {!isAdmin && (
-                  <li>
-                    <Link
-                      className="text-decoration-none"
-                      href="/auth/adminLogin"
-                    >
-                      <button className="bg-primary text-white px-4 py-2 rounded hover:bg-primary/90 transition">
-                       
-                      </button>
-                    </Link>
-                  </li>
+        {/* Offcanvas Menu */}
+        <div
+          className="offcanvas offcanvas-end"
+          tabIndex={-1}
+          id="offcanvasNavbar"
+          aria-labelledby="offcanvasNavbarLabel"
+        >
+          <div className="offcanvas-header">
+            <h5 className="offcanvas-title" id="offcanvasNavbarLabel">
+              BISTA<span className="logo text-primary">POLICLINIC</span>
+            </h5>
+            <button
+              type="button"
+              className="btn-close"
+              data-bs-dismiss="offcanvas"
+              aria-label="Close"
+            />
+          </div>
 
-                )} */}
-                </div>
-              </ul>
+          <div className="offcanvas-body d-flex flex-column flex-lg-row align-items-lg-center justify-content-lg-between w-100">
+            {/* Nav Links */}
+            <ul className="navbar-nav flex-grow-1 d-flex flex-column flex-lg-row gap-2 gap-lg-3 justify-content-lg-end align-items-lg-center mb-4 mb-lg-0">
+              <li className="nav-item">
+                <Link className="nav-link active" href="/">Home</Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link" href="/About">About</Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link" href="/Services">Services</Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link" href="/Doctor">Doctors</Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link" href="/News">News</Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link" href="/Contact">Contact</Link>
+              </li>
+            </ul>
+
+            {/* Buttons */}
+            <div className="d-flex flex-column flex-sm-row gap-3 align-items-stretch align-items-sm-center">
+              <Link href="/Appointment" className="text-decoration-none">
+                <button className="d-flex align-items-center gap-2 bg-primary text-white px-4 py-2 rounded border-0 w-100 w-sm-auto">
+                  Appointment
+                  <FaArrowRightLong className="text-lg" />
+                </button>
+              </Link>
+
+              {isAdmin && (
+                <Link href="/dashboard" className="text-decoration-none">
+                  <button className="bg-success text-white px-4 py-2 rounded border-0 w-100 w-sm-auto">
+                    Dashboard
+                  </button>
+                </Link>
+              )}
             </div>
           </div>
         </div>
-      </nav>
+      </div>
+    </nav>
+
     </>
   );
 }

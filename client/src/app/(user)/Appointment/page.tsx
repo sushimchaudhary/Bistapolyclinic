@@ -123,7 +123,7 @@ const AppointmentPage = () => {
                     onChange={handleChange}
                   />
                 </div>
-
+                
                 <div className="col-lg-6 mb-3">
                   <PreferredDateInput
                     value={formData.preferredDate}
@@ -134,11 +134,11 @@ const AppointmentPage = () => {
                 </div>
 
                 {/* New Time Select */}
-                <div className="col-lg-6 mb-3">
+                <div className="col-lg-12 mb-3">
                   <label className="form-label">Preferred Time</label>
                   <select
                     name="preferredTime"
-                    className="form-control"
+                    className="form-select"
                     value={formData.preferredTime}
                     onChange={handleChange}
                   >
@@ -187,31 +187,32 @@ const AppointmentPage = () => {
                 </div>
 
                 <div className="col-12 d-flex justify-content-center ">
+
+
                   <button
-                    className="btn btn-primary d-flex align-items-center w-100 gap-2 px-4 py-2"
+                    className="btn btn-primary d-inline-flex align-items-center gap-2 px-4 py-3"
                     style={{
-                      borderRadius: "0.5rem",
-                      fontWeight: "bold",
+                      borderRadius: "0.75rem",
+                      fontWeight: "600",
                       fontSize: "1rem",
-                      boxShadow: "0 4px 12px rgba(0, 123, 255, 0.2)",
-                      transition: "all 0.3s ease-in-out",
+                      boxShadow: "0 6px 15px rgba(13, 110, 253, 0.2)",
+                      transition: "all 0.3s ease",
+                      backgroundImage: "linear-gradient(135deg, #0d6efd, #3b82f6)",
+                      border: "none",
                     }}
                     onMouseEnter={(e) => {
                       e.currentTarget.style.transform = "translateY(-2px)";
-                      e.currentTarget.style.boxShadow =
-                        "0 6px 16px rgba(0, 123, 255, 0.3)";
+                      e.currentTarget.style.boxShadow = "0 8px 20px rgba(13, 110, 253, 0.3)";
                     }}
                     onMouseLeave={(e) => {
                       e.currentTarget.style.transform = "translateY(0)";
-                      e.currentTarget.style.boxShadow =
-                        "0 4px 12px rgba(0, 123, 255, 0.2)";
+                      e.currentTarget.style.boxShadow = "0 6px 15px rgba(13, 110, 253, 0.2)";
                     }}
                   >
                     <span className="text-white">Book Appointment</span>
-                    <FaArrowRightLong
-                      style={{ fontSize: "1.2rem", color: "white" }}
-                    />
+                    <FaArrowRightLong style={{ fontSize: "1.2rem", color: "white" }} />
                   </button>
+
                 </div>
               </div>
             </div>

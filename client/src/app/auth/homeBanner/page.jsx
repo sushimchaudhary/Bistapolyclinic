@@ -1,80 +1,3 @@
-// 'use client';
-
-// import React, { useRef, useState } from 'react';
-// import axios from 'axios';
-// import { Toaster, toast } from 'react-hot-toast';
-
-// const HomeBanner = () => {
-//   const fileInputRef = useRef(null);
-//   const [file, setFile] = useState(null);
-//   const [imageUrl, setImageUrl] = useState("");
-
-//   const handleImageUpload = async () => {
-//     if (!file) {
-//       toast.error("Please select an image first");
-//       return;
-//     }
-
-//     const formData = new FormData();
-//     formData.append("image", file);
-
-//     try {
-//       const res = await axios.post("http://localhost:5000/api/image/upload", formData);
-//       setImageUrl(res.data.imageUrl);
-//       toast.success("Banner Image uploaded successfully!");
-//     } catch (error) {
-//       console.error("Banner Image Upload Error:", error);
-//       toast.error("Failed to upload image.");
-//     }
-//   };
-
-//   return (
-//     <div className="mt-8 bg-white p-4 rounded shadow-md">
-//       <Toaster position="top-right" />
-//       <div className="max-w-sm mx-auto bg-white p-6 rounded-lg shadow-md">
-//         <h2 className="text-2xl font-semibold mb-4 text-gray-800">
-//           Upload Home Banner Image
-//         </h2>
-
-//         <input
-//           type="file"
-//           ref={fileInputRef}
-//           onChange={(e) => {
-//             const files = e.target.files;
-//             if (files && files.length > 0) {
-//               setFile(files[0]);
-//             }
-//           }}
-//           className="block w-full text-gray-700 mb-4
-//             file:py-2 file:px-4 file:border-0
-//             file:text-sm file:font-semibold
-//             file:bg-blue-100 file:text-blue-700
-//             hover:file:bg-blue-200 cursor-pointer"
-//         />
-
-//         <button
-//           onClick={handleImageUpload}
-//           className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 rounded-md transition duration-200"
-//         >
-//           Upload
-//         </button>
-//       </div>
-
-//       {imageUrl && (
-//         <div className="mt-4 text-center">
-//           <p className="text-sm text-gray-600 mb-2">Preview:</p>
-//           <img src={imageUrl} alt="Uploaded" className="w-72 rounded border mx-auto" />
-//         </div>
-//       )}
-//     </div>
-//   );
-// };
-
-// export default HomeBanner;
-
-
-
-
 
 'use client';
 
@@ -150,10 +73,79 @@ const HomeBanner = () => {
   };
 
   return (
-    <div className="mt-8 bg-white p-4 rounded shadow-md">
+    // <div className="mt-8 bg-white p-4 rounded">
+    //   <Toaster position="top-right" />
+    //   <div className="max-w-sm mx-auto bg-white p-6 rounded-lg shadow-md">
+    //     <h2 className="text-2xl font-semibold mb-4 text-gray-800">Upload Home Banner Image</h2>
+
+    //     <input
+    //       type="file"
+    //       ref={fileInputRef}
+    //       accept="image/*"
+    //       onChange={(e) => {
+    //         const files = e.target.files;
+    //         if (files && files.length > 0) {
+    //           setFile(files[0]);
+    //         }
+    //       }}
+    //       className="block w-full text-gray-700 mb-4
+    //         file:py-2 file:px-4 file:border-0
+    //         file:text-sm file:font-semibold
+    //         file:bg-blue-100 file:text-blue-700
+    //         hover:file:bg-blue-200 cursor-pointer"
+    //     />
+    //     <div className="text-center">
+    //       <button
+    //         onClick={handleImageUpload}
+    //         className="w-36 bg-blue-600 text-white font-medium py-2 rounded transition-all duration-300 hover:bg-blue-700 hover:shadow-lg hover:scale-105"
+    //       >
+    //         Upload
+    //       </button>
+    //     </div>
+
+    //   </div>
+
+    //   {/* Show preview of uploaded image */}
+    //   {imageUrl && (
+    //     <div className="mt-4 text-center">
+    //       <p className="text-sm text-gray-600 mb-2">Preview:</p>
+    //       <img src={imageUrl} alt="Uploaded" className="w-72 rounded border mx-auto" />
+    //     </div>
+    //   )}
+
+    //   {/* Display all banners */}
+    //   {banners.length > 0 && (
+    //     <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto px-4">
+    //       {banners.map((banner) => (
+    //         <div
+    //           key={banner._id}
+    //           className="flex flex-col justify-between h-[300px] border rounded-lg shadow-md overflow-hidden bg-white"
+    //         >
+    //           <img
+    //             src={banner.imageUrl}
+    //             alt="banner"
+    //             className="h-2/3 w-full object-cover p-2 rounded-2xl"
+    //             loading="lazy"
+    //           />
+
+    //           <div className="p-3 text-center">
+    //             <button
+    //               onClick={() => handleDelete(banner._id)}
+    //               className="bg-blue-600 rounded text-white text-sm font-medium py-2 px-4  hover:bg-dark-700 transition duration-200"
+    //             >
+    //               Delete
+    //             </button>
+    //           </div>
+    //         </div>
+    //       ))}
+    //     </div>
+    //   )}
+
+    // </div>
+    <div className="mt-8 bg-white p-4 rounded">
       <Toaster position="top-right" />
-      <div className="max-w-sm mx-auto bg-white p-6 rounded-lg shadow-md">
-        <h2 className="text-2xl font-semibold mb-4 text-gray-800">Upload Home Banner Image</h2>
+      <div className="max-w-sm mx-auto bg-white p-7 rounded-lg shadow-md text-center">
+        <h2 className="fs-4 font-semibold mb-4 text-primary">Upload Home Banner Image</h2>
 
         <input
           type="file"
@@ -166,50 +158,59 @@ const HomeBanner = () => {
             }
           }}
           className="block w-full text-gray-700 mb-4
-            file:py-2 file:px-4 file:border-0
-            file:text-sm file:font-semibold
-            file:bg-blue-100 file:text-blue-700
-            hover:file:bg-blue-200 cursor-pointer"
+        file:py-2 file:px-4 file:border-3
+        file:text-sm file:font-semibold
+        file:bg-blue-100 file:text-blue-700
+        hover:file:bg-blue-200 cursor-pointer"
         />
 
-        <button
-          onClick={handleImageUpload}
-          className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 rounded-md transition duration-200"
-        >
-          Upload
-        </button>
+        <div className="text-center">
+          <button
+            onClick={handleImageUpload}
+            className="w-36 bg-blue-600 text-white font-medium py-2 rounded transition-all duration-300 hover:bg-blue-700 hover:shadow-lg"
+          >
+            Upload
+          </button>
+        </div>
       </div>
 
       {/* Show preview of uploaded image */}
       {imageUrl && (
-        <div className="mt-4 text-center">
+        <div className="mt-4 text-center px-4">
           <p className="text-sm text-gray-600 mb-2">Preview:</p>
-          <img src={imageUrl} alt="Uploaded" className="w-72 rounded border mx-auto" />
+          <img src={imageUrl} alt="Uploaded" className="w-full max-w-xs rounded border mx-auto" />
         </div>
       )}
 
       {/* Display all banners */}
       {banners.length > 0 && (
-        <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
+        <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 max-w-7xl mx-auto px-4">
           {banners.map((banner) => (
-            <div key={banner._id} className="border rounded shadow p-2 text-center">
+            <div
+              key={banner._id}
+              className="flex flex-col justify-between h-[300px] border rounded-lg shadow-md overflow-hidden bg-white"
+            >
               <img
                 src={banner.imageUrl}
                 alt="banner"
-                className="w-full h-40 object-cover rounded"
+                className="h-2/3 w-full object-cover p-2 rounded-2xl"
                 loading="lazy"
               />
-              <button
-                onClick={() => handleDelete(banner._id)}
-                className="mt-2 text-red-600 hover:underline text-sm"
-              >
-                Delete
-              </button>
+
+              <div className="p-3 text-center">
+                <button
+                  onClick={() => handleDelete(banner._id)}
+                  className="bg-blue-600 rounded text-white text-sm font-medium py-2 px-4"
+                >
+                  Delete
+                </button>
+              </div>
             </div>
           ))}
         </div>
       )}
     </div>
+
   );
 };
 

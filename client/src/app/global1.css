@@ -146,15 +146,17 @@
   /* Adjust opacity here */
 
 }
-.Home_body{
+
+.Home_body {
   z-index: 99;
   opacity: 7;
 }
 
 
-li{
-    list-style: none;
+li {
+  list-style: none;
 }
+
 .News_img {
   position: relative;
   width: 100%;
@@ -201,7 +203,8 @@ li{
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
   overflow: hidden;
   transition: transform 0.3s ease;
-  height: 40%; /* Full height inside the grid cell */
+  height: 40%;
+  /* Full height inside the grid cell */
   display: flex;
   flex-direction: column;
 }
@@ -232,3 +235,86 @@ li{
   font-size: 0.95rem;
   line-height: 1.5;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* footer section  styling start */
+.footer-link {
+  transition: color 0.3s ease, text-decoration 0.3s ease;
+}
+
+.footer-link:hover {
+  color: #ffffff !important;
+  /* Change to pure white */
+  text-decoration: underline;
+}
+@keyframes zoomOut {
+  0% {
+    transform: scale(1.1);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.zoom-out {
+  animation: zoomOut 4s ease-in-out;
+}
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in {
+  animation: fadeInUp 1s ease-out;
+}
+
+
+.carousel.slide .carousel-item {
+  transition: transform 1s ease; /* adjust speed here */
+}
+
+
+
+
+
+
+.input-animate .form-control:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 0.2rem rgba(37, 99, 235, 0.25);
+  transition: border 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.input-animate label {
+  transition: color 0.3s ease-in-out;
+}
+
+.input-animate .form-control:focus ~ label {
+  color: #2563eb;
+}
+

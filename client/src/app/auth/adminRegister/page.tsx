@@ -48,92 +48,195 @@ const AdminRegisterPage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-blue-100 flex items-center justify-center px-4">
-      <Toaster position="top-right" />
-      <div className="w-full max-w-md bg-white p-8 rounded-2xl shadow-2xl border border-blue-100">
-        <div className="flex flex-col items-center mb-6">
-          <Image src="/logo.png" alt="Hospital Logo" width={64} height={64} className="mb-3" />
-          <h1 className="text-3xl font-bold text-blue-700">Admin Registration</h1>
-          <p className="text-sm text-gray-500 mt-1 text-center">
-            Create your account to manage the system
-          </p>
+    // <div className="min-h-screen bg-gradient-to-br from-blue-50 to-blue-100 flex items-center justify-center px-4">
+    //   <Toaster position="top-right" />
+    //   <div className="w-full max-w-md bg-white p-8 rounded-2xl shadow-2xl border border-blue-100">
+    //     <div className="flex flex-col items-center mb-6">
+    //       <Image src="/logo.png" alt="Hospital Logo" width={64} height={64} className="mb-3" />
+    //       <h1 className="text-3xl font-bold text-blue-700">Admin Registration</h1>
+    //       <p className="text-sm text-gray-500 mt-1 text-center">
+    //         Create your account to manage the system
+    //       </p>
+    //     </div>
+
+    //     <form onSubmit={handleSubmit} className="space-y-5">
+    //       <div>
+    //         <label className="block text-sm font-medium text-gray-700 mb-1">Username</label>
+    //         <input
+    //           type="text"
+    //           placeholder="admin123"
+    //           className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+    //           value={username}
+    //           onChange={(e) => setUsername(e.target.value)}
+    //           required
+    //         />
+    //       </div>
+
+    //       <div>
+    //         <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
+    //         <input
+    //           type="email"
+    //           placeholder="admin@example.com"
+    //           className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+    //           value={email}
+    //           onChange={(e) => setEmail(e.target.value)}
+    //           required
+    //         />
+    //       </div>
+
+    //       <div>
+    //         <label className="block text-sm font-medium text-gray-700 mb-1">Password</label>
+    //         <input
+    //           type="password"
+    //           placeholder="********"
+    //           className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+    //           value={password}
+    //           onChange={(e) => setPassword(e.target.value)}
+    //           required
+    //         />
+    //       </div>
+
+    //       <div>
+    //         <label className="block text-sm font-medium text-gray-700 mb-1">Role</label>
+    //         <select
+    //           value={role}
+    //           onChange={(e) => setRole(e.target.value)}
+    //           className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+    //           required
+    //         >
+    //           <option value="admin">Admin</option>
+
+    //           <option value="user">User</option>
+    //         </select>
+    //       </div>
+
+    //       <button
+    //         type="submit"
+    //         disabled={loading}
+    //         className="w-full bg-blue-600 hover:bg-blue-700 transition text-white font-medium py-2 rounded-lg"
+    //       >
+    //         {loading ? 'Registering...' : 'Register'}
+    //       </button>
+    //     </form>
+
+    //     <p className="mt-5 text-center text-sm text-gray-600">
+    //       Already have an account?{' '}
+    //       <Link href="/auth/adminLogin" className="text-blue-600 font-medium hover:underline">
+    //         Login here
+    //       </Link>
+    //     </p>
+    //     <p className="mt-2 text-center text-sm text-gray-600 flex justify-center items-center gap-1">
+    //       Or go to{' '}
+    //       <Link href="/dashboard" className="text-blue-600 font-medium hover:underline flex items-center gap-1">
+    //         <HomeIcon className="h-5 w-5" />
+    //         Dashboard
+    //       </Link>
+    //     </p>
+    //   </div>
+    // </div>
+
+    <div className="min-vh-100 d-flex align-items-center justify-content-center bg-gradient px-3 py-5">
+      {/* Toaster (positioned top right) */}
+      <div className="toast-container position-fixed top-0 end-0 p-3">
+        <Toaster position="top-right" />
+      </div>
+
+      <div className="container">
+        <div className="row justify-content-center">
+          <div className="col-12 col-sm-10 col-md-8 col-lg-6 col-xl-5">
+            <div className="card shadow border-0 rounded-4 p-4">
+              <div className="text-center mb-4">
+                <img
+                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2jqPkR7OFnc9sKKTPnzTPmJKIbGl1rn722Q&s"
+                  alt="Hospital Logo"
+                  width={85}
+                  height={85}
+                  className="mb-3 rounded-circle mx-auto d-block border-4 border-primary p-1"
+                />
+                <h2 className="fw-bold text-primary">Admin Registration</h2>
+                <p className="text-muted small">Create your account to manage the system</p>
+              </div>
+
+              <form onSubmit={handleSubmit}>
+                <div className="mb-3">
+                  <label className="form-label">Username</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="admin123"
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
+                    required
+                  />
+                </div>
+
+                <div className="mb-3">
+                  <label className="form-label">Email</label>
+                  <input
+                    type="email"
+                    className="form-control"
+                    placeholder="admin@example.com"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                  />
+                </div>
+
+                <div className="mb-3">
+                  <label className="form-label">Password</label>
+                  <input
+                    type="password"
+                    className="form-control"
+                    placeholder="********"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    required
+                  />
+                </div>
+
+                <div className="mb-4">
+                  <label className="form-label">Role</label>
+                  <select
+                    className="form-select"
+                    value={role}
+                    onChange={(e) => setRole(e.target.value)}
+                    required
+                  >
+                    <option value="admin">Admin</option>
+                    <option value="user">User</option>
+                  </select>
+                </div>
+                <div className='text-center'>
+                  <button
+                    type="submit"
+                    className="btn btn-primary w-35 rounded"
+                    disabled={loading}
+                  >
+                    {loading ? 'Registering...' : 'Register'}
+                  </button>
+                </div>
+              </form>
+
+              <div className="text-center mt-4">
+                <p className="text-muted small mb-1">
+                  Already have an account?{' '}
+                  <Link href="/auth/adminLogin" className="text-decoration-none fw-semibold text-primary">
+                    Login here
+                  </Link>
+                </p>
+                <p className="text-muted small d-flex justify-content-center align-items-center gap-1">
+                  Or go to{' '}
+                  <Link href="/dashboard" className="text-decoration-none fw-semibold text-primary d-flex align-items-center gap-1">
+                    <i className="bi bi-house-door-fill" /> Dashboard
+                  </Link>
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
-
-        <form onSubmit={handleSubmit} className="space-y-5">
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Username</label>
-            <input
-              type="text"
-              placeholder="admin123"
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              required
-            />
-          </div>
-
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
-            <input
-              type="email"
-              placeholder="admin@example.com"
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
-          </div>
-
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Password</label>
-            <input
-              type="password"
-              placeholder="********"
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
-          </div>
-
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Role</label>
-            <select
-              value={role}
-              onChange={(e) => setRole(e.target.value)}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
-              required
-            >
-              <option value="admin">Admin</option>
-             
-              <option value="user">User</option>
-            </select>
-          </div>
-
-          <button
-            type="submit"
-            disabled={loading}
-            className="w-full bg-blue-600 hover:bg-blue-700 transition text-white font-medium py-2 rounded-lg"
-          >
-            {loading ? 'Registering...' : 'Register'}
-          </button>
-        </form>
-
-        <p className="mt-5 text-center text-sm text-gray-600">
-          Already have an account?{' '}
-          <Link href="/auth/adminLogin" className="text-blue-600 font-medium hover:underline">
-            Login here
-          </Link>
-        </p>
-        <p className="mt-2 text-center text-sm text-gray-600 flex justify-center items-center gap-1">
-          Or go to{' '}
-          <Link href="/dashboard" className="text-blue-600 font-medium hover:underline flex items-center gap-1">
-            <HomeIcon className="h-5 w-5" />
-            Dashboard
-          </Link>
-        </p>
       </div>
     </div>
+
   );
 };
 

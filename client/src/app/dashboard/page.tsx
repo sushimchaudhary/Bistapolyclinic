@@ -10,7 +10,9 @@ import { jwtDecode } from "jwt-decode";
 import UserModal from "@/component/UserModel";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
+import { usePathname } from 'next/navigation';
 
+// import LogoutButton from './LogoutButton';
 
 interface TokenPayload {
   id: string;
@@ -26,6 +28,8 @@ interface User {
 }
 
 export default function Dashboard() {
+  const pathname = usePathname();
+
   const [stats, setStats] = useState({
     totalUsers: 0,
     totalDoctors: 0,
@@ -35,14 +39,14 @@ export default function Dashboard() {
   const [username, setUsername] = useState("Admin");
   const [showUserModal, setShowUserModal] = useState(false);
   const [users, setUsers] = useState<User[]>([]);
-// const fileInputRef = useRef<HTMLInputElement | null>(null);
-// const [file, setFile] = useState<File | null>(null);
-// const [imageUrl, setImageUrl] = useState<string>("");
+  // const fileInputRef = useRef<HTMLInputElement | null>(null);
+  // const [file, setFile] = useState<File | null>(null);
+  // const [imageUrl, setImageUrl] = useState<string>("");
 
   const router = useRouter();
-  
 
-  
+
+
 
   useEffect(() => {
     const fetchAdminData = async () => {
@@ -141,123 +145,89 @@ export default function Dashboard() {
     }
   };
 
-//  banner Upload
-  // const handleImageUpload = async () => {
-  //   if (!file) {
-  //     toast.error("Please select an image first");
-  //     return;
-  //   }
 
-  //   const formData = new FormData();
-  //   formData.append("image", file);
-
-  //   try {
-  //     const res = await axios.post(
-  //       "http://localhost:5000/api/image/upload",
-  //       formData
-  //     );
-  //     setImageUrl(res.data.imageUrl);
-  //     toast.success("Banner Image uploaded successfully!");
-  //   } catch (error) {
-  //     console.error("Banner Image Upload Error:", error);
-  //     toast.error("Failed to upload image.");
-  //   }
-  // };
-
-
- 
-
+  const links = [
+    { href: '/dashboard', icon: '📊', label: 'Dashboard' },
+    { href: '/auth/admin/addDoctors', icon: '🩺', label: 'Doctors' },
+    { href: '/auth/admin/appointments', icon: '📅', label: 'Appointments' },
+    { href: '/auth/admin/addNews', icon: '📰', label: 'News' },
+    { href: '/auth/slider', icon: '🖼️', label: 'About Images' },
+    { href: '/auth/admin/addServices', icon: '💼', label: 'Services' },
+    { href: '/auth/homeBanner', icon: '🏠', label: 'Home' },
+    { href: '/auth/adminRegister', icon: '➕', label: 'Register Admin' },
+  ]
   return (
-    <div className="flex flex-col bg-gray-50 min-h-screen">
-      <div className="flex flex-1">
-        {/* Sidebar */}
-        <aside className="w-64 bg-gradient-to-b from-blue-100 to-blue-50 shadow-lg hidden md:flex flex-col justify-between">
-          <div>
-            <div className="px-6 py-4 border-b border-blue-200">
-              <h2 className="text-2xl font-bold text-blue-800">Admin Panel</h2>
-            </div>
-            <nav className="mt-4 px-4 space-y-3 text-sm text-black font-medium">
-              <Link
-                href="/dashboard"
-                className="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-blue-200 transition-all"
-              >
-                📊 Dashboard
-              </Link>
-              <Link
-                href="/auth/admin/addDoctors"
-                className="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-blue-200 transition-all"
-              >
-                🩺 Doctors
-              </Link>
-              <Link
-                href="/auth/admin/appointments"
-                className="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-blue-200 transition-all"
-              >
-                📅 Appointment Scheduler
-              </Link>
-              <Link
-                href="/auth/admin/addNews"
-                className="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-blue-200 transition-all"
-              >
-                📰 News
-              </Link>
-               <Link
-                href="/auth/slider"
-                className="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-blue-200 transition-all"
-              >
-                 sliderImages
-              </Link>
+    <>
 
-              <Link
-                href="/auth/admin/addServices"
-                className="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-blue-200 transition-all"
-              >
-                 Services
-              </Link>
-              <Link
-                href="/auth/homeBanner"
-                className="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-blue-200 transition-all"
-              >
-                 Home Banner
-              </Link>
-              <Link
-                href="/auth/adminRegister"
-                className="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-blue-200 transition-all"
-              >
-                ➕ Register Admin
-              </Link>
+
+      <div className="flex min-h-screen bg-gray-50">
+        {/* Sidebar - Always Visible, Hover Expandable */}
+        <aside className="pb-0 group fixed top-17 left-0 z-40 h-[80vh] w-[72px] hover:w-64 bg-gradient-to-b from-blue-100 to-blue-50 shadow-lg transition-all duration-300 ease-in-out flex flex-col justify-between overflow-hidden">
+
+          {/* Sidebar Header */}
+          <div className="py-5">
+            <div className="px-4 py-3 border-b border-blue-200 flex items-center gap-2">
+              <span className="text-2xl">🛠️</span>
+              <h2 className="text-xl font-bold text-blue-800 whitespace-nowrap opacity-1 group-hover:opacity-100 transition-opacity duration-300">
+                Admin Panel
+              </h2>
+            </div>
+
+            {/* Navigation Links */}
+            <nav className="mt-4 mb-4  px-2  text-sm font-medium">
+              {links.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className={`flex items-center gap-3 px-3 py-2 rounded-lg transition-all ${pathname === link.href
+                    ? 'bg-blue-300 text-blue-900'
+                    : 'text-black hover:bg-blue-200'
+                    }`}
+                >
+                  <span className="text-xl">{link.icon}</span>
+                  <span className="whitespace-nowrap opacity-1 group-hover:opacity-100 transition-opacity duration-300">
+                    {link.label}
+                  </span>
+                </Link>
+              ))}
+
             </nav>
+            <div className="d-flex items-center px-4 py-3 border-t border-blue-200 gap-3 left-0">
+              <span className="text-xl">🔐</span>
+
+              <div className="opacity-1 group-hover:opacity-100 transition-opacity duration-300">
+                <LogoutButton />
+              </div>
+            </div>
+
           </div>
-          <div className="px-6 py-4 border-t border-blue-200">
-            <LogoutButton />
-          </div>
+
+
         </aside>
 
-        {/* Main Content */}
-        <main className="flex-1 p-6">
+        {/* Main Content Area - Adjust margin for sidebar */}
+        <main className="flex-1 ml-[70px] group-hover:ml-64 transition-all duration-300 p-4 sm:p-6">
           <div className="mb-6">
-            <h1 className="text-2xl font-semibold text-gray-800">
-              Welcome, {username} 👋
-            </h1>
+            <h1 className="text-2xl font-semibold text-gray-800">Welcome, {username} 👋</h1>
             <p className="text-gray-500">Here’s what’s happening today.</p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <Card
-              onClick={handleFetchUsers}
-              className="bg-blue-100 cursor-pointer hover:shadow-lg transition"
-            >
+          {/* Grid Cards */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            <Card onClick={handleFetchUsers} className="bg-blue-100 cursor-pointer hover:shadow-lg transition">
               <CardContent className="p-6">
                 <h2 className="text-lg text-gray-700">Total Users</h2>
                 <p className="text-3xl font-bold">{stats.totalUsers}</p>
               </CardContent>
             </Card>
+
             <Card className="bg-green-100">
               <CardContent className="p-6">
                 <h2 className="text-lg text-gray-700">Total Doctors</h2>
                 <p className="text-3xl font-bold">{stats.totalDoctors}</p>
               </CardContent>
             </Card>
+
             <Card className="bg-yellow-100">
               <CardContent className="p-6">
                 <h2 className="text-lg text-gray-700">Appointments</h2>
@@ -265,60 +235,11 @@ export default function Dashboard() {
               </CardContent>
             </Card>
           </div>
-{/* 
-          Upload home banner  */}
-
-          {/* <div className="mt-8 bg-white p-4 rounded shadow-md">
-            <Toaster position="top-right" />
-            <div className="max-w-sm mx-auto bg-white p-6 rounded-lg shadow-md">
-              <h2 className="text-2xl font-semibold mb-4 text-gray-800">
-                Upload Home Banner Image
-              </h2>
-
-              <input
-                type="file"
-                ref={fileInputRef}
-                onChange={(e) => setFile(e.target.files[0])}
-                className="block w-full text-gray-700 mb-4
-               file:py-2 file:px-4 file:border-0
-               file:text-sm file:font-semibold
-               file:bg-blue-100 file:text-blue-700
-               hover:file:bg-blue-200 cursor-pointer"
-              />
-
-              <button
-                onClick={handleImageUpload}
-                className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 rounded-md transition duration-200"
-              >
-                Upload
-              </button>
-            </div>
-
-            {imageUrl && (
-              <div className="mt-4">
-                <p className="text-sm text-gray-600 mb-1">Preview:</p>
-                <img
-                  src={imageUrl}
-                  alt="Uploaded"
-                  className="w-72 rounded border"
-                />
-              </div>
-            )}
-          </div> */}
-
-         
         </main>
       </div>
 
-      {/* User Modal */}
-      {showUserModal && (
-        <UserModal
-          users={users}
-          onClose={() => setShowUserModal(false)}
-          onDeleteUser={handleDeleteUser}
-          onUpdateUser={handleUpdateUser}
-        />
-      )}
-    </div>
+
+
+    </>
   );
 }

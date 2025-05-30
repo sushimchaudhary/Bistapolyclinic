@@ -32,34 +32,46 @@ const DoctorDetailsPage = async ({ params }: Props) => {
   if (!doctor) return <div className="text-center py-20">Doctor not found</div>;
 
   return (
-    <div className="max-w-3xl mx-auto p-6 bg-white mt-12 shadow-lg rounded-xl">
-      {/* Doctor Image */}
-      <img
-        src={`http://localhost:5000${doctor.image}`}
-        alt={doctor.name}
-        className="w-full h-[400px] object-cover rounded-xl mb-6"
-      />
-      
-      {/* Doctor Name */}
-      <h1 className="text-3xl font-bold text-blue-800">{doctor.name}</h1>
+    <>
+      <div className="container my-5">
+        <div className="row justify-content-center">
+          <div className="col-12 col-lg-10">
+            <div className="bg-white shadow-lg rounded-4 p-4">
+              <div className="row align-items-start g-4">
 
-      {/* Doctor Specialization */}
-      <p className="text-blue-600 font-semibold">{doctor.specialization}</p>
+                {/* Doctor Image Column */}
+                <div className="col-12 col-lg-6">
+                  <img
+                    src={`http://localhost:5000${doctor.image}`}
+                    alt={doctor.name}
+                    className="img-fluid rounded-4"
+                    style={{ maxHeight: "400px", objectFit: "cover", width: "100%" }}
+                  />
+                </div>
 
-      {/* Experience */}
-      <p className="text-gray-500">{doctor.experience}</p>
+                {/* Doctor Details Column */}
+                <div className="col-12 col-lg-6 text-start">
+                  <h1 className="h3 fw-bold text-primary">{doctor.name}</h1>
+                  <p className="text-info fw-semibold mb-1">{doctor.specialization}</p>
+                  <p className="text-secondary mb-2">{doctor.experience}</p>
+                  <p className="text-dark mb-3">{doctor.bio}</p>
 
-      {/* Bio */}
-      <p className="text-gray-800 mt-4">{doctor.bio}</p>
+                  <h5 className="fw-semibold text-secondary mt-4">Education:</h5>
+                  <ul className="ps-3 mb-0">
+                    {doctor.education.map((edu, index) => (
+                      <li key={index}>{edu}</li>
+                    ))}
+                  </ul>
+                </div>
 
-      {/* Education List */}
-      <h3 className="mt-6 font-semibold text-gray-700">Education:</h3>
-      <ul className="list-disc list-inside text-red-500">
-        {doctor.education.map((edu, index) => (
-          <li key={index}>{edu}</li>
-        ))}
-      </ul>
-    </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+    </>
   );
 };
 
