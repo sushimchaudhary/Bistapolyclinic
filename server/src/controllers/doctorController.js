@@ -16,7 +16,7 @@ export const addDoctor = async (req, res) => {
   console.log("Request body:", req.body);
   console.log("Request file:", req.file);
 
-  const { name, specialization, education, experience, bio } = req.body;
+  const { name, specialization, education, experience, service, bio } = req.body;
   const image = req.file ? `/uploads/${req.file.filename}` : '';
 
   // Simple validation
@@ -29,7 +29,9 @@ export const addDoctor = async (req, res) => {
       name,
       specialization,
       education: education.split(',').map((e) => e.trim()),
+      //education,
       experience,
+      service,
       bio,
       image,
     });
@@ -51,7 +53,9 @@ export const updateDoctor = async (req, res) => {
       name: req.body.name,
       specialization: req.body.specialization,
       experience: req.body.experience,
+      service: req.body.service,
       bio: req.body.bio,
+      //education: req.body.education,
       education: req.body.education?.split(",").map(e => e.trim()) || [],
     };
 
@@ -99,6 +103,7 @@ export const getDoctorById = async (req, res) => {
       specialization: doctor.specialization,
       education: doctor.education,
       experience: doctor.experience,
+      service: req.service,
       bio: doctor.bio,
       image: doctor.image,
     };
