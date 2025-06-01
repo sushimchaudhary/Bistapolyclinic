@@ -8,6 +8,7 @@ interface Doctor {
   specialization: string;
   education: string[];
   experience: string;
+  service : string;
   bio: string;
   image: string;
 }
@@ -50,18 +51,20 @@ const DoctorDetailsPage = async ({ params }: Props) => {
                 </div>
 
                 {/* Doctor Details Column */}
-                <div className="col-12 col-lg-6 text-start">
+                <div className="col-12 col-lg-6 text-start ">
                   <h1 className="h3 fw-bold text-primary">{doctor.name}</h1>
-                  <p className="text-info fw-semibold mb-1">{doctor.specialization}</p>
-                  <p className="text-secondary mb-2">{doctor.experience}</p>
-                  <p className="text-dark mb-3">{doctor.bio}</p>
-
-                  <h5 className="fw-semibold text-secondary mt-4">Education:</h5>
+                   <h5 className="fw-semibold text-secondary mt-4">Education:</h5>
                   <ul className="ps-3 mb-0">
                     {doctor.education.map((edu, index) => (
                       <li key={index}>{edu}</li>
                     ))}
                   </ul>
+                  <p className="text-info fw-semibold mb-1">{doctor.specialization}</p>
+                  <p className="text-secondary mb-2">{doctor.experience}</p>
+                  <p className="text-secondary mb-2">{doctor.service}</p>
+                  <p className="text-dark mb-3">{doctor.bio}</p>
+
+                 
                 </div>
 
               </div>

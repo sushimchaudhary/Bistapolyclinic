@@ -114,7 +114,7 @@ const Page = () => {
 
   return (
     // Health Tips & News
-    <div className="min-h-screen bg-gray-100">
+    <div className="min-h-screen ">
       <Toaster position="top-center" />
 
       {/* Header Section */}

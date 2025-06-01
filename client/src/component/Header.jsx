@@ -9,7 +9,6 @@ import {
   FaFacebookF,
   FaInstagram,
   FaTwitter,
-  FaLinkedinIn,
   FaYoutube,
 } from "react-icons/fa";
 import { FaArrowRightLong } from "react-icons/fa6";
@@ -19,16 +18,29 @@ function Header() {
   const [isAdmin, setIsAdmin] = useState(false);
 
   useEffect(() => {
-    const token = localStorage.getItem("adminToken");
-    if (token) {
-      setIsAdmin(true);
-    }
+    const checkToken = () => {
+      const token = localStorage.getItem("adminToken");
+      setIsAdmin(!!token);
+    };
+
+    checkToken();
+
+    const handleStorageChange = () => {
+      checkToken();
+    };
+
+    window.addEventListener("storage", handleStorageChange);
+
+    return () => {
+      window.removeEventListener("storage", handleStorageChange);
+    };
   }, []);
 
-  const handleLogout = () => {
-    localStorage.removeItem("adminToken");
-    setIsAdmin(false); // 🟢 adminToken हटेपछि state पनि false मा सेट हुन्छ
-  };
+  // const handleLogout = () => {
+  //   localStorage.removeItem("adminToken");
+  //   setIsAdmin(false); // ✅ this updates UI immediately
+  //   // router.push("/auth/adminLogin");
+  // };
 
   return (
     <>
@@ -41,18 +53,26 @@ function Header() {
                 <FaClock className="me-1" /> Sun–Fri: 07:00AM - 6:00PM
               </span>
               <span className="d-flex align-items-center ms-md-3">
-                <FaMapMarkerAlt className="me-1" /> New Baneshwor, Kathmandu
+                <FaMapMarkerAlt className="me-1" /> Sisahaniya, Rapti-7, Dang
               </span>
               <span className="d-flex align-items-center ms-md-3">
-                <FaEnvelope className="me-1" /> info@nepguru.com
+                <FaEnvelope className="me-1" /> info@bistapoliclinic.com
               </span>
             </div>
             <div className="col-md-4 d-flex justify-content-center justify-content-md-end gap-3 mt-2 mt-md-0">
-              <a href="#" className="text-white"><FaFacebookF /></a>
-              <a href="#" className="text-white"><FaInstagram /></a>
-              <a href="#" className="text-white"><FaTwitter /></a>
-              <a href="#" className="text-white"><FaLinkedinIn /></a>
-              <a href="#" className="text-white"><FaYoutube /></a>
+              <a href="#" className="text-white">
+                <FaFacebookF />
+              </a>
+              <a href="#" className="text-white">
+                <FaInstagram />
+              </a>
+              <a href="#" className="text-white">
+                <FaTwitter />
+              </a>
+              {/* <a href="#" className="text-white"><FaLinkedinIn /></a> */}
+              <a href="#" className="text-white">
+                <FaYoutube />
+              </a>
             </div>
           </div>
         </div>
@@ -62,7 +82,7 @@ function Header() {
       <nav className="navbar bg-light navbar-expand-lg py-3 border-top border-bottom sticky-top shadow">
         <div className="container d-flex align-items-center justify-content-between">
           <Link className="navbar-brand fw-bold" href="/">
-            BISTA<span className="text-primary">POLICLINIC</span>
+            BISTA <span className="text-primary">POLYCLINIC</span>
           </Link>
 
           <button
@@ -84,7 +104,7 @@ function Header() {
           >
             <div className="offcanvas-header">
               <h5 className="offcanvas-title" id="offcanvasNavbarLabel">
-                BISTA<span className="logo text-primary">POLICLINIC</span>
+                BISTA<span className="logo text-primary">POLYCLINIC</span>
               </h5>
               <button
                 type="button"
@@ -97,22 +117,34 @@ function Header() {
             <div className="offcanvas-body d-flex flex-column flex-lg-row align-items-lg-center justify-content-lg-between w-100">
               <ul className="navbar-nav flex-grow-1 d-flex flex-column flex-lg-row gap-2 gap-lg-3 justify-content-lg-end align-items-lg-center mb-4 mb-lg-0">
                 <li className="nav-item">
-                  <Link className="nav-link active" href="/">Home</Link>
+                  <Link className="nav-link active" href="/">
+                    Home
+                  </Link>
                 </li>
                 <li className="nav-item">
-                  <Link className="nav-link" href="/About">About</Link>
+                  <Link className="nav-link" href="/About">
+                    About
+                  </Link>
                 </li>
                 <li className="nav-item">
-                  <Link className="nav-link" href="/Services">Services</Link>
+                  <Link className="nav-link" href="/Services">
+                    Services
+                  </Link>
                 </li>
                 <li className="nav-item">
-                  <Link className="nav-link" href="/Doctor">Doctors</Link>
+                  <Link className="nav-link" href="/Doctor">
+                    Doctors
+                  </Link>
                 </li>
                 <li className="nav-item">
-                  <Link className="nav-link" href="/News">News</Link>
+                  <Link className="nav-link" href="/News">
+                    News
+                  </Link>
                 </li>
                 <li className="nav-item">
-                  <Link className="nav-link" href="/Contact">Contact</Link>
+                  <Link className="nav-link" href="/Contact">
+                    Contact
+                  </Link>
                 </li>
               </ul>
 
@@ -131,6 +163,12 @@ function Header() {
                         Dashboard
                       </button>
                     </Link>
+                    {/* <button
+                      onClick={handleLogout}
+                      className="bg-danger text-white px-4 py-2 rounded border-0 w-100 w-sm-auto"
+                    >
+                      Logout
+                    </button> */}
                   </>
                 )}
               </div>

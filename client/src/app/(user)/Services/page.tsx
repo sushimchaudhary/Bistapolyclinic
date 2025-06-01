@@ -30,7 +30,6 @@
 //     }
 //   };
 
-
 //   return (
 //     <div className=" min-h-screen bg-gray-100 p-6">
 //       <Toaster position="top-right" />
@@ -52,14 +51,13 @@
 //                   {item.description}
 //                 </p>
 //                  <Link
-//                 href={`/Services/${item._id}`}> 
+//                 href={`/Services/${item._id}`}>
 //               <button className="py-1 px-2 bg-primary text-white font-bold rounded">Learn more</button>
-                
+
 //               </Link>
-              
+
 //               </div>
 
-             
 //             </div>
 //           </div>
 //         ))}
@@ -70,15 +68,13 @@
 
 // export default AddServicesPage;
 
-
-
-
 "use client";
 
 import { useState, useEffect } from "react";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 interface Service {
   _id: string;
@@ -129,7 +125,11 @@ const ServicesPage = () => {
                     src={`http://localhost:5000${item.image}`}
                     alt={item.title}
                     className="card-img-top w-100 h-100"
-                    style={{ objectFit: "cover", borderTopLeftRadius: "0.5rem", borderTopRightRadius: "0.5rem" }}
+                    style={{
+                      objectFit: "cover",
+                      borderTopLeftRadius: "0.5rem",
+                      borderTopRightRadius: "0.5rem",
+                    }}
                   />
                 </div>
                 <div className="card-body d-flex flex-column">
@@ -139,12 +139,12 @@ const ServicesPage = () => {
                       ? item.description.slice(0, 120) + "..."
                       : item.description}
                   </p>
-                  <button
-                    className="btn btn-success mt-3"
-                    onClick={() => handleLearnMore(item._id)}
-                  >
-                    Learn More
-                  </button>
+                  <div className="mt-auto text-center">
+                    <Link href={`/Services/${item._id}`} className="btn btn-sm btn-primary">
+                      Read More
+                    </Link>
+
+                  </div>
                 </div>
               </div>
             </div>

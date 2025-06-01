@@ -413,7 +413,7 @@ export default function Dashboard() {
     { href: '/auth/admin/addNews', icon: '📰', label: 'News' },
     { href: '/auth/slider', icon: '🖼️', label: 'About Images' },
     { href: '/auth/admin/addServices', icon: '💼', label: 'Services' },
-    { href: '/auth/homeBanner', icon: '🏠', label: 'Home' },
+    { href: '/auth/homeBanner', icon: '🏠', label: 'Banner Image' },
     { href: '/auth/adminRegister/superAdmin', icon: '➕', label: 'Register Admin' },
   ]
   return (
@@ -425,8 +425,8 @@ export default function Dashboard() {
         <aside className="pb-0 group fixed top-17 left-0 z-40 h-[100vh] w-[72px] hover:w-64 bg-gradient-to-b from-blue-100 to-blue-50 shadow-lg transition-all duration-300 ease-in-out flex flex-col justify-between overflow-hidden">
 
           {/* Sidebar Header */}
-          <div className="py-2">
-            <div className="px-4 py-3 border-b border-blue-200 flex items-center gap-2">
+          <div className="py-4">
+            <div className="px-2 py-3 border-b border-blue-200 flex items-center gap-2">
               <span className="text-2xl">🛠️</span>
               <h2 className="text-xl font-bold text-blue-800 whitespace-nowrap opacity-1 group-hover:opacity-100 transition-opacity duration-300">
                 Admin Panel
@@ -434,12 +434,12 @@ export default function Dashboard() {
             </div>
 
             {/* Navigation Links */}
-            <nav className="mt-4 mb-2  px-2  text-sm font-medium">
+            <nav className="mt-1 mb-2  px-2   text-sm font-medium">
               {links.map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}
-                  className={`flex items-center gap-3 px-3 py-2 rounded-lg transition-all ${pathname === link.href
+                  className={`flex items-center gap-3 px-3 text-decoration-none py-2 rounded-lg transition-all ${pathname === link.href
                     ? 'bg-blue-300 text-blue-900'
                     : 'text-black hover:bg-blue-200'
                     }`}

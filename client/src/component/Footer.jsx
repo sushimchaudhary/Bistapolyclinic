@@ -22,7 +22,7 @@ const footerData = {
       { icon: <FaFacebookF />, link: "#" },
       { icon: <FaTwitter />, link: "#" },
       { icon: <FaInstagram />, link: "#" },
-      { icon: <FaLinkedinIn />, link: "#" },
+      // { icon: <FaLinkedinIn />, link: "#" },
     ],
   },
   // links: [

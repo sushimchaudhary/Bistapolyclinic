@@ -63,16 +63,25 @@ const HomeBanner = () => {
   const isVideo = (url) => /\.(mp4|webm|ogg)$/i.test(url);
 
   const handleFileChange = (e) => {
-    const files = e.target.files;
-    if (files && files.length > 0) {
-      const selectedFile = files[0];
-      setFile(selectedFile);
+  const files = e.target.files;
+  if (files && files.length > 0) {
+    const selectedFile = files[0];
 
-      // Show preview
-      const url = URL.createObjectURL(selectedFile);
-      setPreviews([url]);
+    // Check size (e.g., limit to 10MB)
+    const maxSize = 10 * 1024 * 1024; // 10MB
+    if (selectedFile.size > maxSize) {
+      toast.error('File size exceeds 10MB limit.');
+      return;
     }
-  };
+
+    setFile(selectedFile);
+
+    // Show preview
+    const url = URL.createObjectURL(selectedFile);
+    setPreviews([url]);
+  }
+};
+
 
   return (
     <div className="mt-8 bg-white p-4 rounded">

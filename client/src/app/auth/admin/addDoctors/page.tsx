@@ -17,28 +17,32 @@ interface Doctor {
   name: string;
   specialization: string;
   education: string[];
+  // education : string;
   experience: string;
+  service: string,
   bio: string;
   image: string;
 }
 
-const specializations = [
-  "Cardiologist",
-  "Dermatologist",
-  "Neurologist",
-  "Pediatrician",
-  "Orthopedic",
-  "Psychiatrist",
-  "Dentist",
-  "ENT Specialist",
-];
+// const specializations = [
+//   "Cardiologist",
+//   "Dermatologist",
+//   "Neurologist",
+//   "Pediatrician",
+//   "Orthopedic",
+//   "Psychiatrist",
+//   "Dentist",
+//   "ENT Specialist",
+// ];
 
 const DoctorPage = () => {
   const [name, setName] = useState("");
   const [specialization, setSpecialization] = useState("");
   const [education, setEducation] = useState<string[]>([]);
+  // const [education, setEducation] = useState("");
   const [newEducation, setNewEducation] = useState("");
   const [experience, setExperience] = useState("");
+   const [service, setService] = useState("");
   const [bio, setBio] = useState("");
   const [image, setImage] = useState<File | null>(null);
   const [doctors, setDoctors] = useState<Doctor[]>([]);
@@ -74,6 +78,7 @@ const DoctorPage = () => {
     setName("");
     setSpecialization("");
     setExperience("");
+    setService("");
     setBio("");
     setEducation([]);
     setNewEducation("");
@@ -90,7 +95,9 @@ const DoctorPage = () => {
       formData.append("name", name);
       formData.append("specialization", specialization);
       formData.append("experience", experience);
+      formData.append("service", service);
       formData.append("bio", bio);
+      // formData.append("education", education);
       formData.append("education", education.join(","));
       if (image) formData.append("imageFile", image);
 
@@ -136,6 +143,7 @@ const DoctorPage = () => {
     setSpecialization(doctor.specialization);
     setEducation(doctor.education);
     setExperience(doctor.experience);
+    setService(doctor.service);
     setBio(doctor.bio);
     setImage(null);
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -172,31 +180,27 @@ const DoctorPage = () => {
             {/* Specialization */}
             <div className="flex flex-col">
               <label className="mb-1 font-medium text-gray-700">Specialization</label>
-              <select
+              <input
+                type="text"
                 value={specialization}
                 onChange={(e) => setSpecialization(e.target.value)}
                 className="p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                 required
               >
-                <option value="">Select specialization</option>
-                {specializations.map((spec) => (
-                  <option key={spec} value={spec}>
-                    {spec}
-                  </option>
-                ))}
-              </select>
+                
+              </input>
             </div>
 
             {/* Experience */}
             <div className="flex flex-col">
-              <label className="mb-1 font-medium text-gray-700">Experience</label>
+              <label className="mb-1 font-medium text-gray-700">schedule</label>
               <input
                 type="text"
-                placeholder="e.g., 5 years"
+                placeholder="Enter your shedule"
                 value={experience}
                 onChange={(e) => setExperience(e.target.value)}
                 className="p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                required
+                // required
               />
             </div>
 
@@ -209,6 +213,19 @@ const DoctorPage = () => {
                 onChange={handleImageChange}
                 className="p-3 border border-gray-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-blue-500"
                 required={!editingDoctorId}
+              />
+            </div>
+
+           {/* service */}
+            <div className="flex flex-col">
+              <label className="mb-1 font-medium text-gray-700">service</label>
+              <input
+                type="text"
+                placeholder="Enter your services"
+                value={service}
+                onChange={(e) => setService(e.target.value)}
+                className="p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                
               />
             </div>
 
@@ -256,11 +273,25 @@ const DoctorPage = () => {
               </div>
             </div>
 
+            {/* <div className="flex flex-col">
+              <label className="mb-1 font-medium text-gray-700">education</label>
+              <input
+                type="text"
+                placeholder="Enter your services"
+                value={education}
+                onChange={(e) => setEducation(e.target.value)}
+                className="p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                
+              />
+            </div> */}
+
+           
+
             {/* Submit / Cancel Buttons */}
             <div className="col-span-1 md:col-span-2 flex flex-col sm:flex-row gap-4">
               <Button
                 type="submit"
-                className="bg-green-600 hover:bg-green-700 text-white py-3 px-6 rounded font-semibold transition w-full sm:w-auto"
+                className="bg-blue-600 hover:bg-blue-700 text-white py-3 px-6 rounded font-semibold transition w-full sm:w-auto"
               >
                 {editingDoctorId ? "Update Doctor" : "Submit Doctor"}
               </Button>
@@ -296,9 +327,6 @@ const DoctorPage = () => {
 
                 <div className="p-4 pt-0 flex flex-col flex-grow">
                   <h3 className="text-lg font-semibold text-gray-900">{doc.name}</h3>
-                  <span className="text-blue-600 text-sm font-medium">{doc.specialization}</span>
-                  <span className="text-sm text-gray-500">{doc.experience}</span>
-                  <p className="text-sm text-gray-700 mt-1 line-clamp-3">{doc.bio}</p>
 
                   <div className="mt-2 space-y-1">
                     {doc.education.map((edu, index) => (
@@ -307,6 +335,18 @@ const DoctorPage = () => {
                       </div>
                     ))}
                   </div>
+
+                  {/* <span className="text-red-500 text-sm font-medium">{doc.education}</span> */}
+                   <span className="text-blue-600 text-sm font-medium">{doc.specialization}</span>
+                  <span className="text-sm text-gray-500">{doc.service}</span>
+                 
+                  <span className="text-sm text-gray-500">{doc.experience}</span>
+                  
+                  
+                  
+                  <p className="text-sm text-gray-700 mt-1 line-clamp-3">{doc.bio}</p>
+
+                  
                   <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2 mt-4">
                     <button
                       onClick={() => handleEdit(doc)}

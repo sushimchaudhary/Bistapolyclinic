@@ -104,6 +104,7 @@ interface Doctor {
   specialization: string;
   education: string[];
   experience: string;
+  service: string;
   bio: string;
   image: string;
 }
@@ -152,10 +153,20 @@ const DoctorPage = () => {
               </div>
               <div className="card-body d-flex flex-column">
                 <h5 className="card-title">{doc.name}</h5>
+                <div className="mb-3">
+                  {doc.education.map((edu, index) => (
+                    <div key={index} className="text-danger small font-semibold">
+                      {edu}
+                    </div>
+                  ))}
+                </div>
                 <p className="text-primary fw-semibold mb-1">
                   {doc.specialization}
                 </p>
+                 <p className="text-muted mb-2 small">{doc.service}</p>
+                
                 <p className="text-muted mb-2 small">{doc.experience}</p>
+               
                 <p
                   className="card-text text-truncate"
                   title={doc.bio}
@@ -164,13 +175,7 @@ const DoctorPage = () => {
                   {doc.bio}
                 </p>
 
-                <div className="mb-3">
-                  {doc.education.map((edu, index) => (
-                    <div key={index} className="text-danger small">
-                      {edu}
-                    </div>
-                  ))}
-                </div>
+                
                 <div className="text-center mt-auto">
                   <a
                     href={`/Doctor/${doc._id}`}
