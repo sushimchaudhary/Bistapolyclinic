@@ -350,13 +350,13 @@ const DoctorPage = () => {
                   <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2 mt-4">
                     <button
                       onClick={() => handleEdit(doc)}
-                      className="w-full sm:w-auto bg-blue-500 hover:bg-blue-600 text-white text-sm px-4 py-2 rounded transition duration-200"
+                      className="btn btn-sm btn-outline-primary"
                     >
                       Edit
                     </button>
                     <button
                       onClick={() => handleDelete(doc._id)}
-                      className="w-full sm:w-auto bg-red-500 hover:bg-red-600 text-white text-sm px-4 py-2 rounded transition duration-200"
+                      className="btn btn-sm btn-outline-danger"
                     >
                       Delete
                     </button>

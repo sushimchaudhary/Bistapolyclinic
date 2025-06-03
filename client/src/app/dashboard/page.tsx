@@ -408,12 +408,12 @@ export default function Dashboard() {
 
   const links = [
     { href: '/dashboard', icon: '📊', label: 'Dashboard' },
-    { href: '/auth/admin/addDoctors', icon: '🩺', label: 'Doctors' },
-    { href: '/auth/admin/appointments', icon: '📅', label: 'Appointments' },
-    { href: '/auth/admin/addNews', icon: '📰', label: 'News' },
+    { href: '/auth/homeBanner', icon: '🏠', label: 'Banner Image' },
     { href: '/auth/slider', icon: '🖼️', label: 'About Images' },
     { href: '/auth/admin/addServices', icon: '💼', label: 'Services' },
-    { href: '/auth/homeBanner', icon: '🏠', label: 'Banner Image' },
+    { href: '/auth/admin/addDoctors', icon: '🩺', label: 'Doctors' },
+    { href: '/auth/admin/addNews', icon: '📰', label: 'News' },
+    { href: '/auth/admin/appointments', icon: '📅', label: 'Appointments' },
     { href: '/auth/adminRegister/superAdmin', icon: '➕', label: 'Register Admin' },
   ]
   return (
@@ -499,16 +499,16 @@ export default function Dashboard() {
             </Card>
           </div>
         </main>
-        
+
         {/* User Modal */}
-      {showUserModal && (
-        <UserModal
-          users={users}
-          onClose={() => setShowUserModal(false)}
-          onDeleteUser={handleDeleteUser}
-          onUpdateUser={handleUpdateUser}
-        />
-      )}
+        {showUserModal && (
+          <UserModal
+            users={users}
+            onClose={() => setShowUserModal(false)}
+            onDeleteUser={handleDeleteUser}
+            onUpdateUser={handleUpdateUser}
+          />
+        )}
       </div>
 
 

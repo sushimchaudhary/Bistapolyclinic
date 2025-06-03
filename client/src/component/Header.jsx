@@ -49,9 +49,9 @@ function Header() {
         <div className="container mx-auto">
           <div className="row align-items-center justify-content-between text-center text-md-start">
             <div className="col-md-8 d-flex flex-column flex-md-row align-items-center gap-2 small">
-              <span className="d-flex align-items-center">
+              {/* <span className="d-flex align-items-center">
                 <FaClock className="me-1" /> Sun–Fri: 07:00AM - 6:00PM
-              </span>
+              </span> */}
               <span className="d-flex align-items-center ms-md-3">
                 <FaMapMarkerAlt className="me-1" /> Sisahaniya, Rapti-7, Dang
               </span>
@@ -80,9 +80,13 @@ function Header() {
 
       {/* navbar start */}
       <nav className="navbar bg-light navbar-expand-lg py-3 border-top border-bottom sticky-top shadow">
-        <div className="container d-flex align-items-center justify-content-between">
+        <div className="container d-flex align-items-center justify-content-between gap-5">
           <Link className="navbar-brand fw-bold" href="/">
-            BISTA <span className="text-primary">POLYCLINIC</span>
+            <img
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQz3jQPBoQ5OX4B2fd7-oJ00xVnN-SV5VrZPg&s"
+              alt="Logo"
+              className="w-30 h-auto object-contain"
+            />
           </Link>
 
           <button
@@ -115,7 +119,7 @@ function Header() {
             </div>
 
             <div className="offcanvas-body d-flex flex-column flex-lg-row align-items-lg-center justify-content-lg-between w-100">
-              <ul className="navbar-nav flex-grow-1 d-flex flex-column flex-lg-row gap-2 gap-lg-3 justify-content-lg-end align-items-lg-center mb-4 mb-lg-0">
+              <ul className="navbar-nav flex-grow-1 d-flex flex-column flex-lg-row gap-2 gap-lg-5 justify-content-lg-center align-items-lg-center mb-4 mb-lg-0 ">
                 <li className="nav-item">
                   <Link className="nav-link active" href="/">
                     Home
@@ -148,7 +152,7 @@ function Header() {
                 </li>
               </ul>
 
-              <div className="d-flex flex-column flex-sm-row gap-3 align-items-stretch align-items-sm-center">
+              <div className="d-flex flex-column flex-sm-row gap-4 align-items-stretch align-items-sm-center">
                 <Link href="/Appointment" className="text-decoration-none">
                   <button className="d-flex align-items-center gap-2 bg-primary text-white px-4 py-2 rounded border-0 w-100 w-sm-auto">
                     Appointment
@@ -163,12 +167,7 @@ function Header() {
                         Dashboard
                       </button>
                     </Link>
-                    {/* <button
-                      onClick={handleLogout}
-                      className="bg-danger text-white px-4 py-2 rounded border-0 w-100 w-sm-auto"
-                    >
-                      Logout
-                    </button> */}
+                   
                   </>
                 )}
               </div>

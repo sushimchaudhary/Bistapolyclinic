@@ -192,7 +192,7 @@ const AddServicesPage = () => {
                   <div className="mt-auto d-flex justify-content-between">
                     <button
                       onClick={() => handleEdit(item)}
-                      className="btn btn-sm btn-outline-success"
+                      className="btn btn-sm btn-outline-primary"
                     >
                       Edit
                     </button>

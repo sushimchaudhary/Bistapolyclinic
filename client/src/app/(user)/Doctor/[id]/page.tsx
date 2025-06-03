@@ -8,7 +8,7 @@ interface Doctor {
   specialization: string;
   education: string[];
   experience: string;
-  service : string;
+  service: string;
   bio: string;
   image: string;
 }
@@ -36,35 +36,40 @@ const DoctorDetailsPage = async ({ params }: Props) => {
     <>
       <div className="container my-5">
         <div className="row justify-content-center">
-          <div className="col-12 col-lg-10">
+          <div className="col-12 col-lg-12">
             <div className="bg-white shadow-lg rounded-4 p-4">
               <div className="row align-items-start g-4">
 
                 {/* Doctor Image Column */}
-                <div className="col-12 col-lg-6">
+                <div className="col-12 col-lg-4" style={{
+                height: "430px",
+                overflow: "hidden",
+              }}>
                   <img
                     src={`http://localhost:5000${doctor.image}`}
                     alt={doctor.name}
                     className="img-fluid rounded-4"
-                    style={{ maxHeight: "400px", objectFit: "cover", width: "100%" }}
                   />
                 </div>
 
                 {/* Doctor Details Column */}
-                <div className="col-12 col-lg-6 text-start ">
+                <div className="col-12 col-lg-8 text-start ">
                   <h1 className="h3 fw-bold text-primary">{doctor.name}</h1>
-                   <h5 className="fw-semibold text-secondary mt-4">Education:</h5>
-                  <ul className="ps-3 mb-0">
-                    {doctor.education.map((edu, index) => (
-                      <li key={index}>{edu}</li>
-                    ))}
-                  </ul>
+                  <div  className="d-flex items-center">
+                    <h5 className="fw-semibold text-secondary mb-0">Education:</h5>
+                    <ul className="mb-0 flex items-center">
+                      {doctor.education.map((edu, index) => (
+                        <li key={index} className="text-start">{edu}</li>
+                      ))}
+                    </ul>
+                  </div>
+
                   <p className="text-info fw-semibold mb-1">{doctor.specialization}</p>
                   <p className="text-secondary mb-2">{doctor.experience}</p>
                   <p className="text-secondary mb-2">{doctor.service}</p>
                   <p className="text-dark mb-3">{doctor.bio}</p>
 
-                 
+
                 </div>
 
               </div>
